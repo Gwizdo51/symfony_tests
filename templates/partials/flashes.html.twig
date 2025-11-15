@@ -1,0 +1,14 @@
+{% for type, messages in app.flashes %}
+
+    {# {{ dump(type, message) }} #}
+    <h3>{{ type }}!</h3>
+
+    <ul>
+        {% for message in messages %}
+            <li>
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endfor %}

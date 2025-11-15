@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Company{% endblock %}
+
+{% block body %}
+<h1>Create company</h1>
+{{ form(companyForm) }}
+{# <a type="button" href="{{ path('home') }}">Cancel</a> #}
+<button onclick="window.location.href = '{{ path('home') }}'">Cancel</button>
+{% endblock %}

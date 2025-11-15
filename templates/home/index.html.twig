@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les entreprises{% endblock %}
+
+{% block body %}
+<h1>Toutes les entreprises</h1>
+{# <a href="/test/public/welcome/">Page de bienvenue</a> #}
+<a href="{{ path('home.welcome') }}">Page de bienvenue</a>
+{# {{ data }} #}
+{# {{ person.firstName }} {{ person.lastName }} #}
+<p>Hello, {{ userName }}!</p>
+<p>{{ person.firstName ~ ' ' ~ (person.lastName | upper) }}</p>
+<p>{{ htmlValue | raw }}</p>
+<p>{{ dump(app) }}</p>
+<p>{{ app.current_route starts with 'home' ? 'Home pages' : 'not Home pages' }}</p>
+<h3>All clients</h3>
+<ul>
+    {% for client in clients %}
+    <li>
+        ID #<strong>{{ client.id }}</strong> :
+        <ul>
+            <li>
+                Name : {{ client.name }}
+            </li>
+            <li>
+                Email : {{ client.email }}
+            </li>
+            <li>
+                Company : {{ client.company.name }}
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+<h3>All companies</h3>
+<ul>
+    {% for company in companies %}
+    <li>
+        <a href="{{ path('company.edit', {id: company.0.id}) }}">ID #<strong>{{ company.0.id }}</strong></a> :
+        <ul>
+            <li>
+                Name : {{ company.0.name }}
+            </li>
+            <li>
+                Address : {{ company.0.address }}
+            </li>
+            <li>
+                Number of members : {{ company.numberOfMembers }}
+            </li>
+            <li>
+                <form action="{{ path('company.delete', {id: company.0.id}) }}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+<button onclick="window.location.href = '{{ path('company.create') }}'">Create a company</button>
+{% endblock %}
