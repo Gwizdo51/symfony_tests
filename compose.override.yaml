@@ -1,7 +1,7 @@
 ---
 # Development environment override
 services:
-  php:
+  symfony_php:
     build:
       context: "."
       target: "frankenphp_dev"
@@ -26,14 +26,14 @@ services:
 ###< symfony/mercure-bundle ###
 
 ###> doctrine/doctrine-bundle ###
-  database:
+  symfony_database:
     ports:
     # - "5432"
     - "${POSTGRES_PORT:-5432}:5432"
 ###< doctrine/doctrine-bundle ###
 
 ###> symfony/mailer ###
-  mailer:
+  symfony_mailer:
     container_name: "symfony_tests_mailer"
     image: "axllent/mailpit"
     ports:

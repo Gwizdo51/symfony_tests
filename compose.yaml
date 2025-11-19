@@ -2,16 +2,18 @@
 networks:
   net:
     name: "symfony_tests"
-
+    # name: "webapps"
+    # external: true
 
 services:
-  php:
+  symfony_php:
     # image: ${IMAGES_PREFIX:-}app-php
     container_name: "symfony_tests_php"
     image: symfony-tests
-    restart: unless-stopped
+    # restart: unless-stopped
     environment:
-      SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
+      # SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
+      SERVER_NAME: ${SERVER_NAME:-localhost}, symfony_php:80
       DEFAULT_URI: https://${SERVER_NAME:-localhost}:${HTTPS_PORT:-443}
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
@@ -45,7 +47,7 @@ services:
       published: ${HTTP3_PORT:-443}
       protocol: udp
     depends_on:
-      database:
+      symfony_database:
         condition: "service_healthy"
 
 # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
@@ -59,7 +61,7 @@ services:
 ###< symfony/mercure-bundle ###
 
 ###> doctrine/doctrine-bundle ###
-  database:
+  symfony_database:
     container_name: "symfony_tests_database"
     image: "postgres:${POSTGRES_VERSION:-16}-alpine"
     environment:
@@ -81,7 +83,7 @@ services:
     - "net"
 ###< doctrine/doctrine-bundle ###
 
-volumes: {}
+# volumes:
 ###> doctrine/doctrine-bundle ###
   # database_data:
 ###< doctrine/doctrine-bundle ###
