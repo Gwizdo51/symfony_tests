@@ -26,14 +26,19 @@ final class HomeController extends AbstractController {
 
     // private static int $myNumber = 18;
 
+    public function __construct(
+        private ClientRepository $clientRepository,
+        private CompanyRepository $companyRepository,
+    ) {}
+
     #[Route('/', name: 'home')]
-    public function index(Request $request, ClientRepository $clientRepository, CompanyRepository $companyRepository): Response {
+    public function index(Request $request): Response {
         // dd($request);
         // $temp = self::$myNumber;
         // return new Response("Yo, myNumber = {$temp}");
         $name = $request->query->get('name', 'Guest');
-        $clients = $clientRepository->findAll();
-        $companies = $companyRepository->findByMinNumberOfMembers(0);
+        $clients = $this->clientRepository->findAll();
+        $companies = $this->companyRepository->findByMinNumberOfMembers(0);
         // dd($companies);
         return $this->render('home/index.html.twig', [
             // 'data' => 'Some useful data',
@@ -60,7 +65,8 @@ final class HomeController extends AbstractController {
     }
 
     #[Route('/welcome', name: 'home.welcome')]
-    public function welcome(Request $request): Response {
+    public function welcome(Request $request, LoggerInterface $logger): Response {
+        $logger->debug('logged debug message');
         return $this->render('home/welcome.html.twig');
     }
 }

@@ -15,10 +15,8 @@ use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Sequentially;
 use function Symfony\Component\String\u;
 
-class CompanyType extends AbstractType
-{
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+class CompanyType extends AbstractType {
+    public function buildForm(FormBuilderInterface $builder, array $options): void {
         $builder
             ->add('name')
             ->add('address')

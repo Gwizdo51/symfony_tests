@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client
@@ -14,6 +15,7 @@ class Client
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['recipes.show'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, unique: true)]

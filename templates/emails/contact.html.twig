@@ -1,0 +1,15 @@
+<h3>A new contact request has been made.</h3>
+
+<ul>
+    <li>
+        <strong>Name :</strong> {{ contactDTO.name }}
+    </li>
+    <li>
+        <strong>Email :</strong> {{ contactDTO.email }}
+    </li>
+</ul>
+
+<p>
+    <strong>Message :</strong><br>
+    {{ contactDTO.message | nl2br }}
+</p>

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/company', name: 'company.')]
 final class CompanyController extends AbstractController {
     // #[Route('/company', name: 'app_company')]
     // public function index(): Response {
@@ -18,7 +19,7 @@ final class CompanyController extends AbstractController {
     //     ]);
     // }
 
-    #[Route('/company/create', name: 'company.create')]
+    #[Route('/create', name: 'create')]
     public function create(Request $request, EntityManagerInterface $em) {
         $newCompany = new Company();
         $form = $this->createForm(CompanyType::class, $newCompany);
@@ -34,7 +35,7 @@ final class CompanyController extends AbstractController {
         ]);
     }
 
-    #[Route('/company/{id}/edit', name: 'company.edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Company $company, Request $request, EntityManagerInterface $em) {
         // dd($company);
         $form = $this->createForm(CompanyType::class, $company);
@@ -51,7 +52,7 @@ final class CompanyController extends AbstractController {
         ]);
     }
 
-    #[Route('/company/{id}/delete', name: 'company.delete', methods: ['DELETE'])]
+    #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
     public function delete(Company $company, EntityManagerInterface $em) {
         $em->remove($company);
         $em->flush();
