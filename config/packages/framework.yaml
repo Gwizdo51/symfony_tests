@@ -9,6 +9,9 @@ framework:
     #fragments: true
     http_method_override: true
 
+    serializer:
+        enable_attributes: true
+
 when@test:
     framework:
         test: true

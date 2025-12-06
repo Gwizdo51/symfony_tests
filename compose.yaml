@@ -6,7 +6,7 @@ networks:
     # external: true
 
 services:
-  symfony_php:
+  php:
     # image: ${IMAGES_PREFIX:-}app-php
     container_name: "symfony_tests_php"
     image: symfony-tests
@@ -47,7 +47,7 @@ services:
       published: ${HTTP3_PORT:-443}
       protocol: udp
     depends_on:
-      symfony_database:
+      database:
         condition: "service_healthy"
 
 # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
@@ -61,7 +61,7 @@ services:
 ###< symfony/mercure-bundle ###
 
 ###> doctrine/doctrine-bundle ###
-  symfony_database:
+  database:
     container_name: "symfony_tests_database"
     image: "postgres:${POSTGRES_VERSION:-16}-alpine"
     environment:
