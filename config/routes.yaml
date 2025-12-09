@@ -7,3 +7,12 @@ controllers:
 # home:
 #     path: /
 #     controller: App\Controller\HomeController::index
+
+api_auth:
+    path: /api/auth
+    methods:
+    - POST
+api_refresh_token:
+    path: /api/auth/refresh
+    methods:
+    - POST

@@ -62,11 +62,11 @@ class Company
     // #[Groups(['recipes.show'])]
     private Collection $members;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     // private ?\DateTimeImmutable $createdAt = null;
     private ?\DateTimeImmutable $createdAt;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     // private ?\DateTimeImmutable $updatedAt = null;
     private ?\DateTimeImmutable $updatedAt;
 
