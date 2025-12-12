@@ -42,11 +42,14 @@ security:
     access_control:
         - { path: ^/api/auth$, methods: [POST], roles: PUBLIC_ACCESS }
         - { path: ^/api/auth/refresh$, methods: [POST], roles: PUBLIC_ACCESS }
-        - { path: ^/api/auth, roles: ROLE_USER }
+        # - { path: ^/api/auth, roles: ROLE_USER }
         - { path: ^/api/users, methods: [POST], roles: PUBLIC_ACCESS }
         - { path: ^/api/users, roles: ROLE_USER }
         - { path: ^/api/clients, roles: ROLE_USER }
         - { path: ^/api/companies, roles: ROLE_USER }
+        - { path: ^/api/orders, roles: ROLE_USER }
+        - { path: ^/api/order_items, roles: ROLE_USER }
+        - { path: ^/api/products, roles: ROLE_USER }
         - { path: ^/api, roles: PUBLIC_ACCESS } # Allows accessing the Swagger UI
         - { path: ^/, roles: PUBLIC_ACCESS }
 
