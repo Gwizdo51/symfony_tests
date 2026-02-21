@@ -1,34 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\State\Badge;
 
 use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
-use App\Enum\Badge\BadgeSystemsEnum;
-use App\Service\Badge\BadgeServiceInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
-use ValueError;
 
-class CompanyProvider implements ProviderInterface {
-
-    public function __construct(
-        private readonly LoggerInterface $logger,
-    ) {}
-
-    private function getService($systemName): BadgeServiceInterface {
-        $this->logger->debug("\$systemName : {$systemName}");
-        try {
-            $badgeSystemServiceClassName = BadgeSystemsEnum::valueFromName(strtoupper($systemName));
-        }
-        catch (ValueError $e) {
-            throw new UnprocessableEntityHttpException('The requested badge system is not available', $e);
-        }
-        return new $badgeSystemServiceClassName();
-    }
-
+final class CompanyProvider extends AbstractBadgeStateHandler implements ProviderInterface {
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null {
         $service = $this->getService($uriVariables['system']);
         $companies = $service->getCompanies();

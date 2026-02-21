@@ -14,26 +14,24 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ApiResource(
     operations: [
         new Get(
-            uriTemplate: '/badge/{system}/companies/{id}',
+            uriTemplate: '/badges/{system}/companies/{id}',
             uriVariables: [
                 'system' => new Link(
                     description: 'The system to get companies from',
                     fromClass: BadgeSystem::class,
                     toProperty: 'system',
                 ),
-                'id' => new Link(
-                    fromClass: BadgeCompany::class,
-                ),
+                'id' => new Link(),
             ],
             openapi: new Operation(
                 summary: 'Get a specific company',
-                description: 'Get a specific company from the badge system specified',
+                description: 'Get a specific company from the specified badge system',
                 tags: ['Badge'],
             ),
             provider: CompanyProvider::class,
         ),
         new GetCollection(
-            uriTemplate: '/badge/{system}/companies',
+            uriTemplate: '/badges/{system}/companies',
             uriVariables: [
                 'system' => new Link(
                     description: 'The system to get companies from',
@@ -43,7 +41,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
             ],
             openapi: new Operation(
                 summary: 'Get the list of companies',
-                description: 'Get the list of companies from the badge system specified',
+                description: 'Get the list of companies from the specified badge system',
                 tags: ['Badge'],
             ),
             provider: CompanyProvider::class,

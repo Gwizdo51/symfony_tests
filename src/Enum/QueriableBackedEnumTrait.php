@@ -4,7 +4,7 @@ namespace App\Enum;
 
 use ValueError;
 
-trait QueriableEnumTrait {
+trait QueriableBackedEnumTrait {
     public static function fromName($name): static {
         foreach (self::cases() as $case) {
             if ($case->name === $name) {

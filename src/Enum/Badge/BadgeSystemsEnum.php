@@ -2,10 +2,10 @@
 
 namespace App\Enum\Badge;
 
-use App\Enum\QueriableEnumTrait;
+use App\Enum\QueriableBackedEnumTrait;
 use App\Service\Badge\SafeDoorsBadgeService;
 
 enum BadgeSystemsEnum: string {
-    use QueriableEnumTrait;
+    use QueriableBackedEnumTrait;
     case SAFEDOORS = SafeDoorsBadgeService::class;
 }
