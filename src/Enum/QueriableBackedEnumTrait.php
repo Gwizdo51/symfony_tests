@@ -15,11 +15,6 @@ trait QueriableBackedEnumTrait {
     }
 
     public static function valueFromName($name): string {
-        foreach (self::cases() as $case) {
-            if ($case->name === $name) {
-                return $case->value;
-            }
-        }
-        throw new ValueError('The requested name was not found in the cases');
+        return self::fromName($name)->value;
     }
 }
